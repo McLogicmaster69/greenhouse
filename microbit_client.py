@@ -14,6 +14,7 @@ class Client:
 
     def main_loop(self):
         while True:
+            ### IMPLEMENT SENSOR CODE HERE
             read_data_registers()
-            self.report.report_information("5", str(calc_temperature()), "90")
+            self.report.report_information("REPLACE WITH CO2", "REPLACE WITH TEMP", "REPLACE WITH LIGHT")
             sleep(500)
