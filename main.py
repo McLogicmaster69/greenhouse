@@ -1,5 +1,5 @@
 from microbit import *
-import radio
+from microbit_client import *
 
-while True:
-    pass
+server = Client()
+server.main_loop()
