@@ -1,7 +1,5 @@
 from microbit import *
-from microbit_serial import *
 from microbit_report import *
-from OLED import *
 from bme688 import *
 
 class Client:
@@ -10,11 +8,27 @@ class Client:
         self.report = Report()
         init_sensor()
         init_gas_sensor()
-        init_display()
 
     def main_loop(self):
+
         while True:
-            ### IMPLEMENT SENSOR CODE HERE
+
             read_data_registers()
-            self.report.report_information("REPLACE WITH CO2", "REPLACE WITH TEMP", "REPLACE WITH LIGHT")
-            sleep(500)
+            temp = round(calc_temperature())
+            humidity = calc_humidity()
+            pressure = calc_pressure()
+            light = display.read_light_level()
+            iaqScore, iaqPercent, eCO2Value = calc_air_quality()
+            self.report.report_information(self.format_data([str(temp), str(humidity), str(light), str(iaqScore), str(iaqPercent), str(eCO2Value)]))
+            sleep(1000)
+
+    def format_data(self, data):
+        if len(data) == 0:
+            return ""
+        
+        output = ""
+        for d in data:
+            output += str(d)
+            output += "|"
+
+        return output[0:-1]
