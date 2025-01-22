@@ -12,4 +12,4 @@ class Server:
         while True:
             incoming = self.report.recieve_information()
             if incoming:
-                self.serial.serialize("CO2: " + incoming[0] + " | Temperature: " + incoming[1] + " | Light: " + incoming[2] + "\n")
+                self.serial.serialize(incoming + "\n")

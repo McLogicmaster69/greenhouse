@@ -1,5 +1,5 @@
 from microbit import *
-from microbit_client import *
+from microbit_server import *
 
-client = Client()
-client.main_loop()
+server = Server()
+server.main_loop()
