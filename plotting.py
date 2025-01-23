@@ -8,16 +8,18 @@ class Plotter:
     def __init__(self):
         self.fig = plt.figure()
         self.axes = []
-        self.axes.append(self.fig.add_subplot(2, 2, 1))
-        self.axes.append(self.fig.add_subplot(2, 2, 2))
-        self.axes.append(self.fig.add_subplot(2, 2, 3))
-        self.axes.append(self.fig.add_subplot(2, 2, 4))
-        self.titles = ["Graph A", "Graph B", "Graph C", "Graph D"]
+        self.axes.append(self.fig.add_subplot(3, 2, 1))
+        self.axes.append(self.fig.add_subplot(3, 2, 2))
+        self.axes.append(self.fig.add_subplot(3, 2, 3))
+        self.axes.append(self.fig.add_subplot(3, 2, 4))
+        self.axes.append(self.fig.add_subplot(3, 2, 5))
+        self.axes.append(self.fig.add_subplot(3, 2, 6))
+        self.titles = ["Temperature", "Humidity", "Light", "IAQ Score", "IAQ Percent", "CO2"]
         self.graph_data = []
 
         self.ani = animation.FuncAnimation(self.fig, self.animate, interval = 1000)
         plt.ion()
-        plt.show(block = False)
+        plt.show()
 
     def add_data(self, data):
         self.graph_data.append(data)
@@ -56,4 +58,4 @@ class Plotter:
             self.axes[i].plot(xs, data[i])
 
     def GUI_update(self):
-        plt.pause(0.01)
+        plt.pause(0.001)
