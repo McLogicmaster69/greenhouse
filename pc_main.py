@@ -11,7 +11,7 @@ plotter = Plotter()
 
 def add_data(data):
     info = data.split("|")
-    plotter.add_data([datetime.datetime.now(), info[0], info[1], info[2], info[3], info[4], info[5]])
+    plotter.add_data([datetime.datetime.now(), int(info[0]), int(info[1]), int(info[2]), int(info[3]), int(info[4]), int(info[5])])
 
 while True:
     if port.in_waiting > 0:
