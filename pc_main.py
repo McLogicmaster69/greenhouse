@@ -3,7 +3,10 @@ import time
 from plotting import *
 import datetime
 
-port = serial.Serial('COM4', 115200)
+print("Type port")
+port = input(">>>")
+
+port = serial.Serial(port, 115200)
 plotter = Plotter()
 
 def add_data(data):
