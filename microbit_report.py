@@ -7,8 +7,11 @@ class Report:
         radio.config(channel = 20, group = 15)
         radio.on()
 
-    def report_information(self, information):
-        radio.send(information)
+    def report_information(self, index, value):
+        radio.send(format(index, value))
+
+    def format_information(self, index, value):
+        return machine.unique_id() + "|" + str(index) + "|" + str(value)
 
     def recieve_information(self):
         incoming = radio.receive()

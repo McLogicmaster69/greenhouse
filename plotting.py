@@ -14,19 +14,18 @@ class Plotter:
         self.axes.append(self.fig.add_subplot(3, 2, 4))
         self.axes.append(self.fig.add_subplot(3, 2, 5))
         self.axes.append(self.fig.add_subplot(3, 2, 6))
-        self.titles = ["Temperature", "Humidity", "Light", "IAQ Score", "IAQ Percent", "CO2"]
-        self.graph_data = []
+        self.titles = ["Temperature", "Humidity", "Pressure", "Light", "IAQ Score", "CO2"]
+
+        self.graph_data = [{}, {}, {}, {}, {}, {}]
 
         self.ani = animation.FuncAnimation(self.fig, self.animate, interval = 1000)
         plt.ion()
         plt.show()
 
-    def add_data(self, data):
-        self.graph_data.append(data)
-
-    def pop_data(self):
-        if len(self.graph_data) > 0:
-            del self.graph_data[0]
+    def add_data(self, id, index, time, data):
+        if not id in self.graph_data[index]:
+            self.graph_data[index][id] = []
+        self.graph_data[index][id].append((time, data))
 
     def amount_of_data(self):
         return len(self.graph_data)
@@ -39,23 +38,23 @@ class Plotter:
         for i in range(len(self.axes)):
             self.axes[i].title.set_text(self.titles[i])
 
+    def animate_graph(self, index):
+        axis = self.axes[index]
+        data = self.graph_data[index]
+
+        for id, values in data.items():
+            x = []
+            y = []
+            for point in values:
+                x.append(point[0])
+                y.append(point[1])
+            axis.plot(x, y, label = id)
+
     def animate(self, i):
-        xs = []
-        data = []
-
-        for i in range(len(self.axes)):
-            data.append([])
-
-        for d in self.graph_data:
-            xs.append(d[0])
-            for i in range(len(self.axes)):
-                data[i].append(d[i + 1])
-
         self.clear()
         self.add_titles()
-
-        for i in range(len(self.axes)):
-            self.axes[i].plot(xs, data[i])
+        for index in range(6):
+            self.animate_graph(index)
 
     def GUI_update(self):
         plt.pause(0.001)
