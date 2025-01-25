@@ -1,5 +1,6 @@
 from microbit import *
-from microbit_server import *
+from microbit_client import *
 
-server = Server()
-server.main_loop()
+### Declare whether the microbit is a client or a server and then enter the main loop of the program
+micro = Client()
+micro.main_loop()
