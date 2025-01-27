@@ -1,5 +1,6 @@
 from microbit import *
 import radio
+import machine
 
 class Report:
     """
@@ -16,7 +17,7 @@ class Report:
         """
         Sends information to the server
         """
-        radio.send(format(index, value))
+        radio.send(self.format_information(index, value))
 
     def format_information(self, index : int, value) -> str:
         """
