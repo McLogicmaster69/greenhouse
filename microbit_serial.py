@@ -14,4 +14,4 @@ class SerialPort:
         """
         Sends data over the port
         """
-        uart.write(message)
+        uart.write(message + "\n")
