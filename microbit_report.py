@@ -13,17 +13,17 @@ class Report:
         radio.config(channel = 20, group = 15)
         radio.on()
 
-    def report_information(self, index : int, value) -> None:
+    def report_information(self, id : int, index : int, value) -> None:
         """
         Sends information to the server
         """
-        radio.send(self.format_information(index, value))
+        radio.send(self.format_information(id, index, value))
 
-    def format_information(self, index : int, value) -> str:
+    def format_information(self, id : int, index : int, value) -> str:
         """
         Formats the information from the client to be sent to the server
         """
-        return machine.unique_id().decode("utf-8") + "|" + str(index) + "|" + str(value)
+        return str(id) + "|" + str(index) + "|" + str(value)
 
     def recieve_information(self):
         """
