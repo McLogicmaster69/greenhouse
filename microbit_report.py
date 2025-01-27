@@ -23,7 +23,7 @@ class Report:
         """
         Formats the information from the client to be sent to the server
         """
-        return str(machine.unique_id()) + "|" + str(index) + "|" + str(value)
+        return machine.unique_id().decode("utf-8") + "|" + str(index) + "|" + str(value)
 
     def recieve_information(self):
         """
