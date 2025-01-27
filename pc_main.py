@@ -18,11 +18,8 @@ def add_data(data) -> None:
     plotter.add_data(info[0], int(info[1]), datetime.datetime.now(), int(info[2]))
 
 while True:
-    message = port.readline().decode().strip()
-    print(message)
-
-while True:
     if port.in_waiting > 0: # If data is in port, read it and add it to the graph
         message = port.readline().decode().strip()
-        add_data(message)
+        if message != "":
+            add_data(message)
     plotter.GUI_update()
