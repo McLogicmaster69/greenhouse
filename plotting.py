@@ -24,6 +24,7 @@ class Plotter:
         self.axes.append(self.fig.add_subplot(3, 2, 6))
         self.TITLES = ["Temperature", "Humidity", "Pressure", "Light", "IAQ Score", "CO2"]
         self.graph_data = [{}, {}, {}, {}, {}, {}]
+        self.ids = []
 
         # Start animation loop to constantly update graphs with new data
         self.ani = animation.FuncAnimation(self.fig, self.animate, interval = 1000)
@@ -36,6 +37,8 @@ class Plotter:
         """
         Add data to the graphs
         """
+        if not id in self.ids:
+            self.ids.append(id)
         if not id in self.graph_data[index]:
             self.graph_data[index][id] = []
         self.graph_data[index][id].append((time, data))
@@ -60,7 +63,10 @@ class Plotter:
         """
         axis = self.axes[index]
         data = self.graph_data[index]
-        for id, values in data.items():
+        for id in self.ids:
+            if not id in data:
+                continue
+            values = data[id]
             x = []
             y = []
             for point in values:
